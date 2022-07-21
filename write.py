@@ -11,12 +11,7 @@ extension determines which of these functions is used.
 You'll edit this file in Part 4.
 """
 import csv
-from dataclasses import field
 import json
-from sqlalchemy import false, true
-
-from sympy import re
-
 
 def write_to_csv(results, filename):
     """Write an iterable of `CloseApproach` objects to a CSV file.
