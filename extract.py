@@ -7,7 +7,8 @@ The `load_approaches` function extracts close approach data from a JSON file,
 formatted as described in the project instructions, into a collection of
 `CloseApproach` objects.
 
-The main module calls these functions with the arguments provided at the command
+The main module calls these functions with the arguments provided at the
+command
 line, and uses the resulting collections to build an `NEODatabase`.
 """
 import csv
@@ -19,7 +20,8 @@ from models import NearEarthObject, CloseApproach
 def load_neos(neo_csv_path):
     """Read near-Earth object information from a CSV file.
 
-    :param neo_csv_path: A path to a CSV file containing data about near-Earth objects.
+    :param neo_csv_path: A path to a CSV file containing data about near-Earth
+     objects.
     :return: A collection of `NearEarthObject`s.
     """
     with open(neo_csv_path) as csvfile:
@@ -38,7 +40,8 @@ def load_neos(neo_csv_path):
 def load_approaches(cad_json_path):
     """Read close approach data from a JSON file.
 
-    :param neo_csv_path: A path to a JSON file containing data about close approaches.
+    :param neo_csv_path: A path to a JSON file containing data about close
+     approaches.
     :return: A collection of `CloseApproach`es.
     """
     with open(cad_json_path) as jsonfile:
@@ -48,8 +51,8 @@ def load_approaches(cad_json_path):
         for each_d in data:
             approaches.append(
                 CloseApproach(
-                    _designation = each_d[0],
-                    time = each_d[3],
-                    distance = each_d[4],
-                    velocity = each_d[7]))
+                    _designation=each_d[0],
+                    time=each_d[3],
+                    distance=each_d[4],
+                    velocity=each_d[7]))
     return approaches
