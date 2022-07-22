@@ -71,40 +71,24 @@ class AttributeFilter:
 class CreateDateFilter(AttributeFilter):
     """ SubClass of AttributeFilter class. It filters close approach NEO based
      on dates"""
-    # def __init__(self, op, value):
-    #     self.op = op
-    #     self.value = value
-
     def get(self, approach):
         return approach.time.date()
 
 class CreateDistanceFilter(AttributeFilter):
     """ SubClass of AttributeFilter class. It filters close approach NEO based
     on distance"""
-    # def __init__(self, op, value):
-    #     self.op = op
-    #     self.value = value
-
     def get(self, approach):
         return approach.distance
 
 class CreateVelocityFilter(AttributeFilter):
     """ SubClass of AttributeFilter class. It filters close approach NEO based
      on velocity"""
-    # def __init__(self, op, value):
-    #     self.op = op
-    #     self.value = value
-
     def get(self, approach):
         return approach.velocity
 
 class CreateDiameterFilter(AttributeFilter):
     """ SubClass of AttributeFilter class. It filters close approach NEO based
      on diameter"""
-    # def __init__(self, op, value):
-    #     self.op = op
-    #     self.value = value
-
     def get(self, approach):
         return approach.neo.diameter
 
@@ -112,10 +96,6 @@ class CreateDiameterFilter(AttributeFilter):
 class CreateHazardousFilter(AttributeFilter):
     """ SubClass of AttributeFilter class. It filters close approach NEO based
     on if they are hazardous or not"""
-    # def __init__(self, op, value):
-    #     self.op = op
-    #     self.value = value
-
     def get(self, approach):
         return approach.neo.hazardous
 
