@@ -43,7 +43,7 @@ class NearEarthObject:
             self.name = None
         else:
             self.name = info['name']
-        
+
         if info.get('diameter') is None or info['diameter'] == '':
             self.diameter = float('nan')
         else:
@@ -69,12 +69,15 @@ class NearEarthObject:
     def __str__(self):
         """Return `str(self)`."""
         if self.hazardous:
-            return f"{self.fullname} has a diameter of {self.diameter:.3f} km and is potentially hazardous."
+            return (f"{self.fullname} has a diameter of {self.diameter:.3f} "
+                   f"km and is potentially hazardous.")
         else:
-            return f"{self.fullname} has a diameter of {self.diameter:.3f} km and is not potentially hazardous."
-        
+            return (f"{self.fullname} has a diameter of {self.diameter:.3f} "
+                    f"km and is not potentially hazardous.")
+
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of this object."""
+        """Return `repr(self)`, a computer-readable string representation of
+         this object."""
         return (f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
                 f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})")
 
@@ -101,17 +104,17 @@ class CloseApproach:
             self._designation = None
         else:
             self._designation = info['_designation']
-        
+
         if info.get('time') is None or info['time'] == '':
             self.time = None
         else:
             self.time = cd_to_datetime(info['time'])
-        
+
         if info.get('distance') is None or info['distance'] == '':
             self.distance = float('nan')
         else:
             self.distance = float(info['distance'])
-        
+
         if info.get('velocity') is None or info['velocity'] == '':
             self.velocity = float('nan')
         else:
@@ -137,7 +140,9 @@ class CloseApproach:
 
     def __str__(self):
         """Return `str(self)`."""
-        return f"On {self.time}, '{self.neo.fullname}' approaches Earth at a distance of {self.distance:.2f} au and a velocity of {self.velocity:.2f} km/s."
+        return (f"On {self.time}, '{self.neo.fullname}' approaches Earth at a "
+                f"distance of {self.distance:.2f} au and a velocity of "
+                f"{self.velocity:.2f} km/s.")
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""

@@ -48,7 +48,6 @@ class NEODatabase:
             if neo.name is not None:
                 self.neo_by_name[neo.name] = neo
 
-        # TODO: Link together the NEOs and their close approaches.
         for approach in self._approaches:
             neo = self.neo_by_designation[approach._designation]
             if neo is not None:
@@ -112,6 +111,6 @@ class NEODatabase:
             filters_results = []
             for each_filter in filters:
                 filters_results.append(each_filter(approach))
-                
+
             if all(filters_results):
                 yield approach

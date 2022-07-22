@@ -15,6 +15,7 @@ The `limit` function simply limits the maximum number of values produced by an
 iterator.
 """
 import operator
+from itertools import islice
 
 class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
@@ -67,52 +68,59 @@ class AttributeFilter:
     def __repr__(self):
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
-# Class to filter close approach NEO based on dates
 class CreateDateFilter(AttributeFilter):
-    def __init__(self, op, value):
-        self.op = op
-        self.value = value
-    
+    """ SubClass of AttributeFilter class. It filters close approach NEO based
+     on dates"""
+    # def __init__(self, op, value):
+    #     self.op = op
+    #     self.value = value
+
     def get(self, approach):
         return approach.time.date()
 
-# Class to filter close approach NEO based on distance
 class CreateDistanceFilter(AttributeFilter):
-    def __init__(self, op, value):
-        self.op = op
-        self.value = value
-    
+    """ SubClass of AttributeFilter class. It filters close approach NEO based
+    on distance"""
+    # def __init__(self, op, value):
+    #     self.op = op
+    #     self.value = value
+
     def get(self, approach):
         return approach.distance
 
-# Class to filter close approach NEO based on velocity
 class CreateVelocityFilter(AttributeFilter):
-    def __init__(self, op, value):
-        self.op = op
-        self.value = value
-    
+    """ SubClass of AttributeFilter class. It filters close approach NEO based
+     on velocity"""
+    # def __init__(self, op, value):
+    #     self.op = op
+    #     self.value = value
+
     def get(self, approach):
         return approach.velocity
 
-# Class to filter close approach NEO based on diameter
 class CreateDiameterFilter(AttributeFilter):
-    def __init__(self, op, value):
-        self.op = op
-        self.value = value
-    
+    """ SubClass of AttributeFilter class. It filters close approach NEO based
+     on diameter"""
+    # def __init__(self, op, value):
+    #     self.op = op
+    #     self.value = value
+
     def get(self, approach):
         return approach.neo.diameter
 
 # Class to filter close approach NEO if they are hazardous or not
 class CreateHazardousFilter(AttributeFilter):
-    def __init__(self, op, value):
-        self.op = op
-        self.value = value
-    
+    """ SubClass of AttributeFilter class. It filters close approach NEO based
+    on if they are hazardous or not"""
+    # def __init__(self, op, value):
+    #     self.op = op
+    #     self.value = value
+
     def get(self, approach):
         return approach.neo.hazardous
 
-# Main filter function that calls defines different filters based on arguments passed
+# Main filter function that calls defines different filters based on arguments
+# passed
 def create_filters(date=None, start_date=None, end_date=None,
                    distance_min=None, distance_max=None,
                    velocity_min=None, velocity_max=None,
@@ -147,39 +155,39 @@ def create_filters(date=None, start_date=None, end_date=None,
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    allFilters = []
-    
-    if date: 
-        allFilters.append(CreateDateFilter(operator.eq, date))
-    
+    all_filters = []
+
+    if date:
+        all_filters.append(CreateDateFilter(operator.eq, date))
+
     if start_date:
-        allFilters.append(CreateDateFilter(operator.ge, start_date))
+        all_filters.append(CreateDateFilter(operator.ge, start_date))
 
     if end_date:
-        allFilters.append(CreateDateFilter(operator.le, end_date))
+        all_filters.append(CreateDateFilter(operator.le, end_date))
 
     if distance_min:
-        allFilters.append(CreateDistanceFilter(operator.ge, distance_min))
-    
+        all_filters.append(CreateDistanceFilter(operator.ge, distance_min))
+
     if distance_max:
-        allFilters.append(CreateDistanceFilter(operator.le, distance_max))
+        all_filters.append(CreateDistanceFilter(operator.le, distance_max))
 
     if velocity_min:
-        allFilters.append(CreateVelocityFilter(operator.ge, velocity_min))
+        all_filters.append(CreateVelocityFilter(operator.ge, velocity_min))
 
     if velocity_max:
-        allFilters.append(CreateVelocityFilter(operator.le, velocity_max))
+        all_filters.append(CreateVelocityFilter(operator.le, velocity_max))
 
     if diameter_min:
-        allFilters.append(CreateDiameterFilter(operator.ge, diameter_min))
+        all_filters.append(CreateDiameterFilter(operator.ge, diameter_min))
 
     if diameter_max:
-        allFilters.append(CreateDiameterFilter(operator.le, diameter_max))
+        all_filters.append(CreateDiameterFilter(operator.le, diameter_max))
 
     if hazardous is not None:
-        allFilters.append(CreateHazardousFilter(operator.eq, hazardous))
+        all_filters.append(CreateHazardousFilter(operator.eq, hazardous))
 
-    return allFilters
+    return all_filters
 
 
 def limit(iterator, n=None):
@@ -191,11 +199,9 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    from itertools import islice
-
     if n == 0:
-        stop = None 
-    else: 
+        stop = None
+    else:
         stop = n
 
     return islice(iterator, stop)

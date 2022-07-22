@@ -46,12 +46,10 @@ def load_approaches(cad_json_path):
         approaches = []
         data = jsondata['data']
         for each_d in data:
-            # CSV headers ["des","orbit_id","jd","cd","dist","dist_min","dist_max","v_rel","v_inf","t_sigma_f","h"]
             approaches.append(
                 CloseApproach(
-                    _designation = each_d[0], 
-                    time = each_d[3], 
+                    _designation = each_d[0],
+                    time = each_d[3],
                     distance = each_d[4],
                     velocity = each_d[7]))
     return approaches
-        
